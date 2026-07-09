@@ -1,6 +1,7 @@
 from wordslist import words_list
 import random
 
+print("Let's play hangman!")
 word = list(random.choice(words_list))
 solved = ["_"]*len(word)
 guesses_left = 5
