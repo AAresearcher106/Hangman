@@ -2,31 +2,40 @@ from wordslist import words_list
 import random
 
 print("Let's play hangman!")
+
+###Picks a random word from the list, generates a list representing the user's progress on that word.
 word = list(random.choice(words_list))
 solved = ["_"]*len(word)
+
+###Defines number of lives and initializes the guessed letters list.
 guesses_left = 5
 guessed_letters = [] 
 
 while solved != word and guesses_left > 0:
+	### prints out the user's progress, lives, and prompts an input.
 	print(" ".join(solved))
 	print(f"{guesses_left} guesses left \n")
 
 	guess = input("Guess a Letter \n")
 
 	if guess in guessed_letters or len(guess) > 1:
-		continue
-
+		continue ### skipping already-guessed letters and bad inputs
+	
 	guessed_letters.append(guess)
 
 	if guess in word:
+		### determines position of each letter corresponding to a correct guess
 		for (i, letter) in enumerate(word):
 			if letter == guess:
 				solved[i] = letter
+	
 
 	else:
 		guesses_left -= 1
+		### removes a life for wrong guesses
 
 print(''.join(solved))
+###printing user's progress
 
 if(solved == word):
 	print("YOU WIN!")
