@@ -89,7 +89,7 @@ while play_again:
                                 play_again = False
                                 print("Thank you for playing")
                                 
-                        if choice == "yes":
+                        elif choice == "yes":
                                 play_again = True
 
                         else: 
