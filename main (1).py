@@ -13,6 +13,7 @@ while play_again:
         solved = ["_"]*len(word)
         guesses_left = 6
         guessed_letters = [] 
+        helped_used = False
 
         #Main gameplay loop of prompting user
         while solved != word and guesses_left > 0:
@@ -21,14 +22,45 @@ while play_again:
                 print(f"{guesses_left} errors left \n")
 
                 #Prompts user
-                guess = input("Guess a Letter \n")
+                guess = input("Guess a Letter, the whole word, or type 'help' for a hint \n").lower()
+                print("")
 
-                #Checks that guess is valid
-                if guess in guessed_letters or len(guess) > 1 or not guess.isalpha():
-                        print("Invalid input. Please enter a single letter you haven't guessed yet.")
+                if guess == "help":
+                        if help_used:
+                                print("")
+                                print("You have already used a hint this round")
+                                print("")
+                        else:
+                                help_used = True
+                                if guessed_letter:
+                                        print(f"Letters already guessed: {', '.join(sorted(guessed_letter))}")
+                                else:
+                                        print("No letters guessed yet.")
+                                remaining = [l for l in word if l not in guessed_letters and l not in solved]
+                                if remaining:
+                                        hint = random.choice(remaining)
+                                        guessed_letters.append(hint)
+                                        for (i, letter) in enumerate(word):
+                                                if letter == hint:
+                                                        solved[i] = letter
+                                        print(f"Free letter revealed: {hint.upper()}")
+                                else:
+                                        print("No hidden letters left to reveal")
                         continue
 
-                #Adds guess to progress
+                #Checks that guess is valid
+                 if len(guess) >= 5:
+                        if list(guess) == word:
+                                solved = word
+                        else:
+                                print(f"Wrong! The word was not '{guess}'. You lose!")
+                                guesses_left = 0
+                        continue
+
+                if guess in guessed_letters or not guess.isalpha() or 1 < len(guess) < 5:
+                        print("Invalid input. Please enter a single letter, or a full word.")
+                        continue
+        
                 guessed_letters.append(guess)
         
                 if guess in word:
@@ -46,10 +78,19 @@ while play_again:
         #End messages which change if the user wins or loses
         #Ask the player if they want to play again
         #Reprompt if input is not yes or no
+        print(''.join(solved))
         if(solved == word): 
                 print("")
                 print("YOU WIN!")
                 print("")
+
+                #choice = input("Game Over! Would you like to play again? (y/n) \n")
+                #print("")
+                #if choice == "n":
+                        #play_again = False
+                        #print("Thank you for playing")
+                #else:
+                        #play_again = True
 
                 choice = 1
                 while choice != "no" and choice != "yes":
