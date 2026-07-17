@@ -7,12 +7,16 @@ print("Let's play hangman!")
 play_again = True
 
 while play_again:
+         #Prompts the user to choose a difficulty of 1-3
          difficulty = ""
         while difficulty not in ("1", "2", "3"):
-                difficulty = input("Choose a difficulty:\n  1 - Easy   (5 letters)\n  2 - Medium (6-7 letters)\n  3 - Hard   (8+ letters, no hints)\n> ")
+                #Explains difficulties
+                 difficulty = input("Choose a difficulty:\n  1 - Easy   (5 letters)\n  2 - Medium (6-7 letters)\n  3 - Hard   (8+ letters, no hints)\n> ")
+                 #If a number 1 to 3 is not input, another prompt is given
                 if difficulty not in ("1", "2", "3"):
                         print("Please enter 1, 2, or 3.")
 
+         #Difficulties change letter count in words, from 5 to 8
         if difficulty == "1":
                 pool = [w for w in words_list if len(w) == 5]
         elif difficulty == "2":
