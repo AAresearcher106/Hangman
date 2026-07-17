@@ -25,21 +25,21 @@ while play_again:
                 guess = input("Guess a Letter, the whole word, or type 'help' for a hint \n").lower()
                 print("")
 
-                if guess == "help":
-                        if help_used:
+                if guess == "help": #Bonus Point 1: allows user to see letters they've already used
+                        if help_used: #makes sure hints are only used once
                                 print("")
                                 print("You have already used a hint this round")
                                 print("")
                         else:
                                 help_used = True
                                 if guessed_letter:
-                                        print(f"Letters already guessed: {', '.join(sorted(guessed_letter))}")
+                                        print(f"Letters already guessed: {', '.join(sorted(guessed_letter))}") #Sorts letters alphabetically with commas
                                 else:
-                                        print("No letters guessed yet.")
-                                remaining = [l for l in word if l not in guessed_letters and l not in solved]
+                                        print("No letters guessed yet.") 
+                                remaining = [l for l in word if l not in guessed_letters and l not in solved] #For unguessed letters
                                 if remaining:
                                         hint = random.choice(remaining)
-                                        guessed_letters.append(hint)
+                                        guessed_letters.append(hint) 
                                         for (i, letter) in enumerate(word):
                                                 if letter == hint:
                                                         solved[i] = letter
@@ -53,13 +53,13 @@ while play_again:
                         if list(guess) == word:
                                 solved = word
                         else:
-                                print(f"Wrong! The word was not '{guess}'. You lose!")
+                                print(f"Wrong! The word was not '{guess}'. You lose!") #If guess is invalid
                                 guesses_left = 0
                         continue
 
-                if guess in guessed_letters or not guess.isalpha() or 1 < len(guess) < 5:
+                if guess in guessed_letters or not guess.isalpha() or 1 < len(guess) < 5: #Conditional for invalid inputs
                         print("Invalid input. Please enter a single letter, or a full word.")
-                        continue
+                        continue 
         
                 guessed_letters.append(guess)
         
@@ -108,7 +108,7 @@ while play_again:
                         else: 
                                 print("Invalid input.")
         else:
-                print(f"Out of lives, game over! The word was {''.join(word)}")
+                print(f"Out of lives, game over! The word was {''.join(word)}") 
                 print("""
                           +---+
                           |   |
