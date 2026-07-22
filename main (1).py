@@ -1,6 +1,6 @@
 #Importing modules to randomly select words
-from wordslist import words_list
 import random
+from wordslist import words_list
 
 #Initiating the game
 print("Let's play hangman!")
@@ -8,10 +8,10 @@ play_again = True
 
 while play_again:
          #Prompts the user to choose a difficulty of 1-3
-         difficulty = ""
+        difficulty = ""
         while difficulty not in ("1", "2", "3"):
                 #Explains difficulties
-                 difficulty = input("Choose a difficulty:\n  1 - Easy   (5 letters)\n  2 - Medium (6-7 letters)\n  3 - Hard   (8+ letters, no hints)\n> ")
+                difficulty = input("Choose a difficulty:\n  1 - Easy   (5 letters)\n  2 - Medium (6-7 letters)\n  3 - Hard   (8+ letters, no hints)\n> ")
                  #If a number 1 to 3 is not input, another prompt is given
                 if difficulty not in ("1", "2", "3"):
                         print("Please enter 1, 2, or 3.")
@@ -29,7 +29,7 @@ while play_again:
                 continue
         #Picks random word, initializes user progress and lives
         #user progress includes both progress on the word and failed guesses
-        word = list(random.choice(words_list))
+        word = list(random.choice(pool))
         solved = ["_"]*len(word)
         guesses_left = 6
         guessed_letters = [] 
@@ -47,7 +47,7 @@ while play_again:
                         guess = input("Guess a letter or the whole word \n").lower()
                 else:
                         guess = input("Guess a Letter, the whole word, or type 'help' for a hint \n").lower()
-                 print("")
+                print("")
 
                 if guess == "help": #Bonus Point 1: allows user to see letters they've already used
                         if hard_mode:
@@ -76,7 +76,7 @@ while play_again:
                         continue
 
                 #Checks that guess is valid
-                 if len(guess) >= 5:
+                if len(guess) >= 5:
                         if list(guess) == word:
                                 solved = word
                         else:
